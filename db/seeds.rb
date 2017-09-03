@@ -76,7 +76,7 @@ Category.second.subcategories.second.brands.create! [{name: "local"},
 {name: "Japanese"},
 {name: "brazilian"}]
 
-Category.first.subcategories.first.brands.first.items.create! [{title: "Cabbage", price: 20 , description: "A green vegetable"},
+Category.first.subcategories.first.brands.first.items.create! [{title: "Cabbage", price: 20.89 , description: "A green vegetable"},
 {title: "Egg Plant", price: 30 , description: "Fine blue plant"}]
 
 
@@ -86,5 +86,5 @@ Category.second.subcategories.second.brands.third.items.create! [{title: "salmon
 {title: "brazilian fish", price: 40 , description: "A very good fish"}]
 
 
-User.create! [{name: "Dipayan Deb", email: "chotumotu11@gmail.com", phone: 9883060084 , address: "FE 197 Salt Lake" , account_type: "normal" },
-{name: "Deepak Tibrewal" , email: "Tibrewal@gmail.com", phone: 8999999999 , address: "Some Apartment" , account_type: "normal"} ]
+User.create! [{name: "Dipayan Deb", email: "chotumotu11@gmail.com", phone: 9883060084 , address: "FE 197 Salt Lake" , password_digest: "boo" ,account_type: "normal" },
+{name: "Deepak Tibrewal" , email: "Tibrewal@gmail.com", phone: 8999999999 , address: "Some Apartment" , password_digest: "nuoo" ,account_type: "normal"} ]
