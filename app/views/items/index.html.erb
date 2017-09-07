@@ -1,0 +1,15 @@
+<div class="row">
+	<div class="col-sm-3 sidebar">
+		<%= form_tag items_path , { method: "get", remote: true, id: "buga"} do %>
+		<p>Category:</p>
+		<p><%= select_tag( :category , options_from_collection_for_select( Category.all , :id , :name , @cat.nil? ? "" : @cat.id) , { prompt: "Select Category" , onchange: "$('#buga').submit()"} ) %></p>
+		<p>Sub-Category: </p>
+		<p class="updated"><%= select_tag(:subcategory , options_from_collection_for_select([] , :id , :name), {prompt: "Select Subcategory" , onchange: "$('#buga').submit()"}) %></p>
+		<p>Brand: </p>
+		<p class="updated2"> <%= select_tag(:brand , options_from_collection_for_select([], :id , :name), {prompt: "Select brand"}) %>  </p>
+		<% end %>
+	</div>
+	<div class="updated3 col-sm-offset-3">
+		<%= render 'list' %>
+	</div>
+</div>

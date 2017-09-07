@@ -1,0 +1,14 @@
+<div class="update-body">
+	<% @all_items.each do |item| %>
+	<section class="col-sm-4 col-md-3">
+		<div class="card" style="width: 20rem;">
+  		<%= image_tag "http://via.placeholder.com/140x100" , class: "card-img-top" %>
+  		<div class="card-body">
+    		<h4 class="card-title"><%= item.title %></h4>
+    		<p class="card-text">The price is : <%= item.price %> </p>
+    		<%= link_to "View" , item , class: "btn btn-success" %>
+  		</div>
+		</div>
+	</section>
+	<% end %>
+</div>
