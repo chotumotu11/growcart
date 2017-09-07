@@ -1,0 +1,29 @@
+<h3 class="text-center">Sign up</h3>
+
+<div class="text-center create-user">
+	<%= form_for(@allUser) do |f| %>
+		<div class="field">
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+		</div>
+		<div class="field">
+			<%= f.label :email %>
+			<%= f.text_field :email%>
+		</div>
+		<div class="field">
+			<%= f.label :phone %>
+			<%= f.text_field :phone%>
+		</div>
+		<div class="field">
+			<%= f.label :address %>
+			<%= f.text_area :address%>
+		</div>
+		<div class="field">
+			<%= f.label :password%>
+			<%= f.password_field :password%>
+		</div>
+		<div class="actions">
+			<%= f.submit %>
+		</div>
+	<% end %>
+</div>

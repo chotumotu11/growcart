@@ -1,5 +1,8 @@
+
 class User < ApplicationRecord
-	validates :name  , :email , :password_digest , :account_type , :phone , :address , presence: true
+
+	has_secure_password
+	validates :name  , :email , :phone , :address , presence: true
 	validates :email , format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i , message: "Not Valid email" }
 	validates :email , :phone , uniqueness: { message: "Already Exist" }
 	validates :phone , numericality: { message: "Integer Only" }

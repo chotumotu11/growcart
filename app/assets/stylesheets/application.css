@@ -42,3 +42,15 @@ header.navbar a:link , header.navbar a:visited {
 h3.text-center {
 	text-transform: uppercase;
 }
+
+.create-user .field, .create-user .actions{
+	padding: 20px;
+}
+
+.create-user {
+	border-style: solid;
+	border-width: 2px;
+	border-color: grey;
+	border-radius: 2px;
+
+}
