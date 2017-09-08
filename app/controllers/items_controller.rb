@@ -14,6 +14,9 @@ class ItemsController < ApplicationController
   	@brand = @subcat.brands.find_by(id: @test3) unless @test3.nil? || @test3=="" || @subcat == nil
   	@all_items = @brand.items unless @brand == nil
 
+    @userName = User.find_by(id: session[:user_id])
+    
+
   	respond_to do |format|
   		format.html
   		format.json
