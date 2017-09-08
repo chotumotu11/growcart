@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
 	before_action :set_post , only: [:show , :edit , :update , :destroy]
+  skip_before_action :ensure_login , only: [:new , :create]
 
 	def index
 		@allUsers = User.all 
@@ -22,6 +23,10 @@ class UsersController < ApplicationController
   		flash[:notice] = "Not saved Please try again later"
   	end
 
+  end
+
+  def show
+    @itemsBought = current_user.items.all 
   end
 
   def destroy

@@ -1,5 +1,6 @@
 <header class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header"> <h3><%= link_to "GrowCart", items_path , id: "logo" %></h3></div>
+     <p class="navbar-text navbar-right"><%= "Signed in as #{current_user.name}" if logged_in? %></p>
   </div>
 </header>

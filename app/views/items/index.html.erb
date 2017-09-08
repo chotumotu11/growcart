@@ -8,6 +8,12 @@
 		<p>Brand: </p>
 		<p class="updated2"> <%= select_tag(:brand , options_from_collection_for_select([], :id , :name), {prompt: "Select brand"}) %>  </p>
 		<% end %>
+
+		<p>
+			<% if logged_in?  %> 
+			<%= link_to "My Account" , current_user %>
+			<% end %>
+		</p>
 	</div>
 	<div class="updated3 col-sm-offset-3">
 		<%= render 'list' %>

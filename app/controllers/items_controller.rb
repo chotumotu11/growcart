@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
 	before_action :set_post , only: [:show , :edit , :update , :destroy]
+  skip_before_action :ensure_login , only: [:index , :show]
   def index
   	@test = params[:category]
   	@test2 = params[:subcategory]
@@ -25,7 +26,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-
+    @userName = User.find_by(id: session[:user_id])
   end
 
   private
