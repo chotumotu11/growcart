@@ -10,26 +10,26 @@
 	<h2>Your Orders</h2>
 	<%= "No Orders" if @itemsBought== [] %>
 	<ul class="list-group">
+		<table class="table">
+  		<thead>
+    		<tr>
+      		<th>id</th>
+      		<th>Title</th>
+      		<th>Price</th>
+      		<th>View</th>
+    		</tr>
+  		</thead>
 		<% @itemsBought.each do |item| %>
-			<table class="table">
-  			<thead>
-    			<tr>
-      			<th>id</th>
-      			<th>Title</th>
-      			<th>Price</th>
-      			<th>View</th>
-    			</tr>
-  			</thead>
-  			<tbody>
-    			<tr>
-      			<th scope="row"><%= item.id %> </th>
-      			<td><%= item.title %></td>
-      			<td> <%= item.price %> </td>
-      			<td><%= link_to "View" , item %></td>
-    			</tr>
-  			</tbody>
-			</table>
-		<% end %>
+  		<tbody>
+    		<tr>
+      		<th scope="row"><%= item.id %> </th>
+      		<td><%= item.title %></td>
+      		<td> <%= item.price %> </td>
+      		<td><%= link_to "View" , item %></td>
+    		</tr>
+  		</tbody>
+  	<% end %>
+		</table>
 	</ul>
 </section>
 

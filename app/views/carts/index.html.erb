@@ -1,0 +1,27 @@
+<h1>Your Cart</h1>
+<% cartItems = current_user.my_cart_items %>
+<table class="table">
+	<thead>
+  	<tr>
+    	<th>Id</th>
+    	<th>Title</th>
+    	<th>Price</th>
+    	<th>Options</th>
+  	</tr>
+	</thead>
+	<tbody>
+	<% cartItems.each do |theItem| %>
+  	<tr>
+    	<th scope="row"><%= theItem[:id] %></th>
+    	<td><%= theItem[:title] %></td>
+    	<td><%= theItem[:price] %></td>
+    	<td><%= link_to "Remove" , cart_path(theItem) , method: :put %></td>
+  	</tr>
+  <% end %>
+  </tbody>
+</table>
+<div class=buttons>
+<%= link_to "Keep on Shopping" , root_path %>
+<br>
+<%= link_to "Buy and Chekout" , Cart.first , method: :delete %>
+</div>

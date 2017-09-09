@@ -9,4 +9,9 @@ class User < ApplicationRecord
 	validates :phone , length: { minimum: 8 , maximum: 10 , message: "not valid phone number"}
 	has_and_belongs_to_many :items
 	has_many :carts
+
+	def my_cart_items
+		 item_ids = carts.all.pluck :item_id
+		 Item.where(id: item_ids)
+	end
 end

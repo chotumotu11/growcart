@@ -12,7 +12,10 @@
 		<p>
 			<% if logged_in?  %> 
 			<%= link_to "My Account" , current_user %>
+			<br>
+			<%= link_to "My cart" , carts_path %>
 			<% end %>
+
 		</p>
 	</div>
 	<div class="updated3 col-sm-offset-3">
