@@ -25,6 +25,26 @@ class ItemsController < ApplicationController
   	end
   end
 
+  def new
+  end
+  
+  def create
+    @title = params[:title]
+    @price = params[:price]
+    @desc = params[:description]
+    @category = Category.find_by(id: params[:category])
+    @subcat = @category.subcategories.find_by(id: params[:subcategory])
+    @brand = @subcat.brands.find_by(id: params[:brand])
+    @newItem =  @brand.items.create title: @title , price: @price , description: @desc
+    if @newItem.save 
+      redirect_to admin_index_path , notice: "Success for new item"
+    else
+      redirect_to admin_index_path , notice: "Not Success for new item"
+    end    
+
+
+  end
+
   def show
     @userName = User.find_by(id: session[:user_id])
   end

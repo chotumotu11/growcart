@@ -1,0 +1,30 @@
+ <h4> <%= link_to "Admin Dashboard" , admin_index_path , class: "btn btn-success" %>
+<h3>3. Add new items to sell </h3>
+<%= form_tag items_path , { method: "post", id: "buga"} do %>
+	<div class=field>
+		<%= label_tag :title %>
+		<%= text_field_tag :title %>
+	</div> 
+		<div class=field>
+		<%= label_tag :price %>
+		<%= text_field_tag :price %>
+	</div> 
+	<div class=field>
+		<%= label_tag :description %>
+		<%= text_area_tag :description %>
+	</div> 
+	<div class=field>
+		<%= select_tag(:category , options_from_collection_for_select( Category.all , :id , :name) , { prompt: "Select Category" , class: "auto-update"} ) %>
+	</div>
+	<div class=field>
+		<%= select_tag(:subcategory , "" , {prompt: "Select subcategory", class: "sub-update"} ) %>
+	</div>
+	<div class=field>
+		<%= select_tag(:brand , "" , {prompt: "Select Brand", class: "brand"} ) %>
+	</div>
+	<div class=action>
+		<%= submit_tag("Create Item") %>
+	</div>
+<% end %>
+<br>
+<br>

@@ -1,0 +1,19 @@
+<h1>Admin Dashboard</h1>
+<h2><%= notice %></h2>
+<h3>1. <%= link_to "Add new category" , new_category_path , class: "btn btn-success" %> </h3>
+<h3>2. <%= link_to "All Users" , users_path , class: "btn btn-success"  %></h3>
+<h3>3. <%= link_to "Add new items to sell" , new_item_path, method: "get" , class: "btn btn-success" %></h3>
+<h3>4. Add new subcategory </h3>
+<%= form_for(:category, url: new_subcategory_path, method: "get") do |f| %>
+	<%= f.label :category %>
+	<%= f.select(:id,options_from_collection_for_select( Category.all , :id , :name) , { prompt: "Select Category" }) %>
+	<%= f.submit "Go" , class: "btn btn-success" %>
+<% end %>
+<h3> 5. Add new Brand</h3>
+<%= form_tag new_brand_path , method: "get" do %>
+	<%= select_tag(:category , options_from_collection_for_select( Category.all , :id , :name) , { prompt: "Select Category" , class: "auto-update"} ) %>
+	<br><br>
+	<%= select_tag(:subcategory , "" , {prompt: "Select subcategory", class: "sub-update"} ) %>
+	<br><br>
+	<%= submit_tag("Submit") %>
+<% end %>

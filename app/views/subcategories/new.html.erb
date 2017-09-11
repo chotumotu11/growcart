@@ -1,0 +1,28 @@
+ <h2><%= notice %></h2>
+ <h4> <%= link_to "Admin Dashboard" , admin_index_path , class: "btn btn-success" %>
+<h3>Add new Subcategory for <%= @catname %> </h3>
+<%= form_for(@newSubCat) do |f| %>
+	<div class= "field" >
+    <%= f.hidden_field :category ,value: @catName[:id] %>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+		<%= f.submit :Create , class: "btn btn-success"  %>
+	</div>
+<% end %>
+
+	<table class="table">
+  <thead>
+    <tr>
+      <th>Category Name</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @subCatAll.each do |subcat| %>
+    <tr>
+      <td scope="row"><%= subcat[:name] %></td>
+      <td><%= link_to "Destroy" , subcat , method: :delete%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
