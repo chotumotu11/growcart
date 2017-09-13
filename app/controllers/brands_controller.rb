@@ -16,8 +16,18 @@ class BrandsController < ApplicationController
   end
 
   def create
+    subCatId = params[:brand][:subcategory]
+    @subCat = Subcategory.find_by(id: subCatId)
+    brand = params[:brand][:name]
+    @newBrand = @subCat.brands.create(name: brand)
+    @newBrand.save
+    redirect_to admin_index_path
   end
 
   def destroy
+    brandId = params[:id]
+    @deleteBrand = Brand.find_by(id: brandId)
+    @deleteBrand.destroy
+    redirect_to admin_index_path
   end
 end

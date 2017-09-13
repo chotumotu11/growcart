@@ -1,4 +1,4 @@
- <h4> <%= link_to "Admin Dashboard" , admin_index_path , class: "btn btn-success" %>
+ <h4> <%= link_to "Admin Dashboard" , admin_index_path , method: "get" , class: "btn btn-success" %>
 <h3>3. Add new items to sell </h3>
 <%= form_tag items_path , { method: "post", id: "buga"} do %>
 	<div class=field>

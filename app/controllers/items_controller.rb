@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 	before_action :set_post , only: [:show , :edit , :update , :destroy]
   skip_before_action :ensure_login , only: [:index , :show]
+  skip_before_action :ensure_admin , only: [:index, :show]
   def index
   	@test = params[:category]
   	@test2 = params[:subcategory]
@@ -49,8 +50,33 @@ class ItemsController < ApplicationController
     @userName = User.find_by(id: session[:user_id])
   end
 
+  def edit
+  end
+
+  def update
+    @cat = Category.find_by(id: params[:category])
+    @subcat = Subcategory.find_by(id: params[:subcategory])
+    @newBrand = Brand.find_by(id: params[:brand])
+    item_name = params[:item][:title]
+    item_price = params[:item][:price]
+    item_description = params[:item][:description]
+    @item = Item.find_by(id: params[:id])
+    @oldBrand = @item.getbrand
+    @item.update(title: item_name, price: item_price , description: item_description)
+    @oldBrand.items.delete(@item)
+    @updateItem = Item.find_by(id: params[:id])
+    @newBrand.items << @updateItem
+  end
+
+  def destroy
+    itemToDelete = Item.find_by(id: params[:id])
+    itemToDelete.destroy
+    redirect_to root_path
+  end
   private
   	def set_post
   		@my_item = Item.find(params[:id]) 
   	end 
+
+
 end

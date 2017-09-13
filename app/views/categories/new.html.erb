@@ -1,5 +1,5 @@
  <h2><%= notice %></h2>
- <h4> <%= link_to "Admin Dashboard" , admin_index_path , class: "btn btn-success" %>
+ <h4> <%= link_to "Admin Dashboard" , admin_index_path , method: "get" , class: "btn btn-success" %>
 <h3>1. Add new category </h3>
 <%= form_for(@newCat) do |f| %>
 	<div class= "field" >

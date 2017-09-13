@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
 	skip_before_action :ensure_login , only: [:new , :create]
+  skip_before_action :ensure_admin
   
   def new
   	if session[:user_id]

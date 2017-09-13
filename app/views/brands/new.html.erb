@@ -3,6 +3,8 @@
 <h3>Add new brand for Subcategory :<%= @subCatName  %> and Category : <%= @catName %> </h3>
 <%= form_for(@newBrand) do |f| %>
 	<div class= "field" >
+    <%= f.hidden_field :category , value: @cat[:id] %>
+    <%= f.hidden_field :subcategory , value: @subcat[:id] %>
 		<%= f.label :name %>
 		<%= f.text_field :name %>
 		<%= f.submit :Create , class: "btn btn-success"  %>

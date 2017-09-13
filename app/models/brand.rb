@@ -1,5 +1,5 @@
 class Brand < ApplicationRecord
   validates :name , presence: true 
   belongs_to :subcategory , optional: true
-  has_many :items
+  has_many :items , dependent: :nullify
 end

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
 	before_action :set_post , only: [:show , :edit , :update , :destroy]
   skip_before_action :ensure_login , only: [:new , :create]
+  skip_before_action :ensure_admin , only: [:new , :create , :show ]
 
 	def index
 		@allUsers = User.all 
