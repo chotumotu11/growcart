@@ -27,7 +27,7 @@ header.navbar a:link , header.navbar a:visited {
 } 
 
 .footer {
-  position: absolute;
+	 position: fixed;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
@@ -53,4 +53,8 @@ h3.text-center {
 	border-color: grey;
 	border-radius: 2px;
 
+}
+
+body>.container{
+	margin-bottom: 50px;
 }
