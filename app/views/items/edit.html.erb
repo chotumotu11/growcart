@@ -8,6 +8,9 @@
 <%= f.label :description %>
 <%= f.text_area :description %>
 <br>
+	<%= f.label :avatar %>
+	<%= f.file_field :avatar %>
+<br>
 <div class=field>
 	<%= f.label :category %>
 	<%= select_tag(:category , options_from_collection_for_select( Category.all , :id , :name, @my_item.getcategory[:id] ) , { class: "auto-update"} ) %>

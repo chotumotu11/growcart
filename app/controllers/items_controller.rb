@@ -33,10 +33,11 @@ class ItemsController < ApplicationController
     @title = params[:title]
     @price = params[:price]
     @desc = params[:description]
+    @av = params[:avatar]
     @category = Category.find_by(id: params[:category])
     @subcat = @category.subcategories.find_by(id: params[:subcategory])
     @brand = @subcat.brands.find_by(id: params[:brand])
-    @newItem =  @brand.items.create title: @title , price: @price , description: @desc
+    @newItem =  @brand.items.create title: @title , price: @price , description: @desc , avatar: @av
     if @newItem.save 
       redirect_to admin_index_path , notice: "Success for new item"
     else
@@ -61,11 +62,13 @@ class ItemsController < ApplicationController
     item_price = params[:item][:price]
     item_description = params[:item][:description]
     @item = Item.find_by(id: params[:id])
+    @av = params[:item][:avatar]
     @oldBrand = @item.getbrand
-    @item.update(title: item_name, price: item_price , description: item_description)
+    @item.update(title: item_name, price: item_price , description: item_description , avatar: @av)
     @oldBrand.items.delete(@item)
     @updateItem = Item.find_by(id: params[:id])
     @newBrand.items << @updateItem
+    redirect_to root_path
   end
 
   def destroy
