@@ -11,14 +11,14 @@ class Item < ApplicationRecord
 
 
   def getbrand
-   	Brand.find_by(id: self[:brand_id])
+   	Brand.find_by(id: self[:brand_id]) unless self[:brand_id].nil?
   end
 
   def getsubcategory
-  	Subcategory.find_by(id: getbrand[:subcategory_id])
+  	Subcategory.find_by(id: getbrand[:subcategory_id]) unless getbrand.nil?
   end
 
   def getcategory
-  	Category.find_by(id: getsubcategory[:category_id])
+  	Category.find_by(id: getsubcategory[:category_id]) unless getsubcategory.nil?
   end
 end

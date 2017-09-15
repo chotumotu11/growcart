@@ -65,7 +65,7 @@ class ItemsController < ApplicationController
     @av = params[:item][:avatar]
     @oldBrand = @item.getbrand
     @item.update(title: item_name, price: item_price , description: item_description , avatar: @av)
-    @oldBrand.items.delete(@item)
+    @oldBrand.items.delete(@item) unless @oldBrand.nil?
     @updateItem = Item.find_by(id: params[:id])
     @newBrand.items << @updateItem
     redirect_to root_path
