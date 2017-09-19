@@ -1,33 +1,100 @@
 <h1>Admin Dashboard</h1>
 <h2><%= notice %></h2>
-<h3>1. <%= link_to "Add new category" , new_category_path , class: "btn btn-success" %> </h3>
-<h3>2. <%= link_to "All Users" , users_path , class: "btn btn-success"  %></h3>
-<h3>3. <%= link_to "Add new items to sell" , new_item_path, method: "get" , class: "btn btn-success" %></h3>
-<h3>4. Add new subcategory </h3>
-<%= form_for(:category, url: new_subcategory_path, method: "get") do |f| %>
-	<%= f.label :category %>
-	<%= f.select(:id,options_from_collection_for_select( Category.all , :id , :name) , { prompt: "Select Category" }) %>
-	<%= f.submit "Go" , class: "btn btn-success" %>
+
+<ul class="nav justify-content-center nav-tabs">
+  <li class="nav-item">
+    <%= link_to "Add new category" , new_category_path , class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "All Users" , users_path , class: "nav-link"  %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Add new items to sell" , new_item_path, method: "get" , class: "nav-link" %>
+  </li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      Add Subcategory <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+      	<%= form_for(:category, url: new_subcategory_path, method: "get") do |f| %>
+					<%= f.label :category %>
+					<%= f.select(:id,options_from_collection_for_select( Category.all , :id , :name) , { prompt: "Select Category" }) %>
+					<%= f.submit "Go" , class: "btn btn-success" %>
+				<% end %>
+      </li>
+    </ul>
+  </li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      Add Brand <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+      	<%= form_tag new_brand_path , method: "get" do %>
+					<%= select_tag(:category , options_from_collection_for_select( Category.all , :id , :name) , { prompt: "Select Category" , class: "auto-update"} ) %>
+					<br><br>
+					<%= select_tag(:subcategory , "" , {prompt: "Select subcategory", class: "sub-update"} ) %>
+					<br><br>
+					<%= submit_tag("GO", class: "btn btn-success") %>
+				<% end %>
+      </li>
+    </ul>
+  </li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      Change Admin Password <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+      	<%= form_for(current_user , url: admin_path(current_user[:id]) , method: "put") do |f|  %>
+				<div class="field">
+					<%= label_tag :old_password %>
+					<%= password_field_tag :oldpassword %>
+				</div>
+				<div class="field" >
+					<%= f.label :password %>
+					<%= f.password_field :password%>
+				</div>
+				<div class="action" >
+					<%= f.submit "Change" , class: "btn btn-success" %>
+				</div>
+				<% end %>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3> Recently Bought Items</h3>
+
+<% @allUsers.each do |user| %>
+	<% items = user.items.all %>
+	<% unless items == [] %>
+	<% unless user.account_type=="admin" %> 
+		<div class="alert alert-success" role="alert">
+			 User Name: <%= user.name %> and User ID : <%= user.id %>
+		</div>
+		<table class="table">
+	  	<thead>
+	    	<tr>
+	      	<th>#</th>
+	      	<th>Title</th>
+	      	<th>Price</th>
+	      	<th>Options</th>
+	    	</tr>
+	  	</thead>
+	  	<tbody>
+	  	<% items.each do |item| %>
+	    	<tr>
+	      	<th scope="row"><%= item.id %></th>
+	      	<td><%= item.title %></td>
+	      	<td><%= item.price %></td>
+	      	<td><%= link_to "View" , item %></td>
+	    	</tr>
+	    <% end %>
+	  	</tbody>
+		</table>
+	<% end %>
+	<% end %>
 <% end %>
-<h3> 5. Add new Brand</h3>
-<%= form_tag new_brand_path , method: "get" do %>
-	<%= select_tag(:category , options_from_collection_for_select( Category.all , :id , :name) , { prompt: "Select Category" , class: "auto-update"} ) %>
-	<br><br>
-	<%= select_tag(:subcategory , "" , {prompt: "Select subcategory", class: "sub-update"} ) %>
-	<br><br>
-	<%= submit_tag("Submit", class: "btn btn-success") %>
-<% end %>
-<h3>6. Update Admin Password. </h3>
-<%= form_for(current_user , url: admin_path(current_user[:id]) , method: "put") do |f|  %>
-	<div class="field">
-		<%= label_tag :oldpassword %>
-		<%= password_field_tag :oldpassword %>
-	</div>
-	<div class="field" >
-		<%= f.label :password %>
-		<%= f.password_field :password%>
-	</div>
-	<div class="action" >
-		<%= f.submit class: "btn btn-success" %>
-	</div>
-<% end %>
+

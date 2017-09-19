@@ -1,13 +1,24 @@
+<h3> Edit Item </h3>
 <%= form_for(@my_item) do |f| %>
-<%= f.label :title %>
-<%= f.text_field :title %>
-<br>
-<%= f.label :price %>
-<%= f.text_field :price %>
-<br>
-<%= f.label :description %>
-<%= f.text_area :description %>
-<br>
+
+<div class="form-group row">
+	<%= f.label :title , class: "col-sm-1 col-sm-label" %>
+	<div class="col-sm-6">
+		<%= f.text_field :title , class: "form-control" %>
+	</div>
+</div>
+<div class="form-group row">
+	<%= f.label :price , class: "col-sm-1 col-sm-label" %>
+	<div class="col-sm-6">
+		<%= f.text_field :price , class: "form-control" %>
+	</div>
+</div>
+<div class="form-group row" >
+	<%= f.label :description , class: "col-sm-1 col-sm-label" %>
+	<div class="col-sm-6">
+		<%= f.text_area :description , class: "form-control" %>
+	</div>
+</div>
 	<%= f.label :avatar %>
 	<%= f.file_field :avatar %>
 <br>

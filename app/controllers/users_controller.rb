@@ -12,14 +12,15 @@ class UsersController < ApplicationController
     if session[:user_id] && current_user.account_type != "admin"
       redirect_to root_path
     end
-  	@allUser = User.new
+  	
+    @user = User.new
 
   end
 
   def create
-  	@createUser = User.new(user_params)
+  	@user = User.new(user_params)
 
-  	if @createUser.save
+  	if @user.save
   		acc_type = User.find_by(email: params[:user][:email])
   		acc_type.account_type = "normal"
   		acc_type.save
@@ -27,8 +28,7 @@ class UsersController < ApplicationController
       redirect_to root_path , notice: "logged in successfully"
 
   	else
-  		flash[:notice] = "Not saved Please try again later"
-      redirect_to new_user_path
+  		render :new
   	end
 
   end

@@ -23,6 +23,7 @@ class SubcategoriesController < ApplicationController
    @cat = Category.find_by(id: catId)
    @newSubCat = @cat.subcategories.create(name: subCatName)
    @newSubCat.save
+   p @newSubCat.errors.messages
    redirect_to action: "new" , category: {id: catId}
   end
 

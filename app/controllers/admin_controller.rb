@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   def index
   	@newItem = Item.new
+    @allUsers = User.all
   end
 
   def update
@@ -16,4 +17,3 @@ class AdminController < ApplicationController
   	end
   end
 end
-
