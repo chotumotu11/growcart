@@ -9,16 +9,14 @@
 		<p class="updated2"> <%= select_tag(:brand , options_from_collection_for_select([], :id , :name), {prompt: "Select brand"}) %>  </p>
 		<% end %>
 
-		<p>
+		<ul class="nav nav-pills nav-stacked">
 			<% if logged_in?  %> 
-			<%= link_to "My Account" , current_user %>
-			<br>
-			<%= link_to "My cart" , carts_path %>
-			<br>
-			<%= link_to "Admin Dashboard" , admin_index_path, method: "get" if is_admin? %>
+			<li> <%= link_to "My Account" , current_user , class: "nav-link" %> </li>
+			<li> <%= link_to "My cart" , carts_path , class: "nav-link" %> </li>
+			<li> <%= link_to "Admin Dashboard" , admin_index_path, method: "get" , class: "nav-link" if is_admin? %></li>
 			<% end %>
 
-		</p>
+		</ul>
 	</div>
 	<div class="updated3 col-sm-offset-3">
 		<%= render 'list' %>
