@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   validates :price , numericality: { message: "Integer Only"}
   belongs_to :brand, optional: true
   has_and_belongs_to_many :users
-  has_many :carts
+  has_many :carts , dependent: :destroy
 
 
 

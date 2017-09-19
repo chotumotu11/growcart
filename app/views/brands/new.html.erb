@@ -1,5 +1,5 @@
  <h2><%= notice %></h2>
- <h4> <%= link_to "Admin Dashboard" , admin_index_path , class: "btn btn-success" %>
+ <h4> <%= link_to "Admin Dashboard" , admin_index_path, method: "get" , class: "btn btn-success" %>
 <h3>Add new brand for Subcategory :<%= @subCatName  %> and Category : <%= @catName %> </h3>
 <%= form_for(@newBrand) do |f| %>
 	<div class= "field" >

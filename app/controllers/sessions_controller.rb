@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
 
+
 	skip_before_action :ensure_login , only: [:new , :create]
   skip_before_action :ensure_admin
+  skip_before_action :verify_authenticity_token , only: [:destroy]
   
   def new
   	if session[:user_id]
@@ -22,7 +24,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-  	reset_session
-  	redirect_to login_path , notice: "You have been logged out successfully"
+    if session[:user_id].nil?
+      redirect_to login_path , notice: "You have already been logged out"
+    else
+    	reset_session
+    	redirect_to login_path , notice: "You have been logged out successfully"
+    end
   end
 end

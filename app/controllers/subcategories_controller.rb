@@ -23,13 +23,14 @@ class SubcategoriesController < ApplicationController
    @cat = Category.find_by(id: catId)
    @newSubCat = @cat.subcategories.create(name: subCatName)
    @newSubCat.save
-   redirect_to admin_index_path
+   redirect_to action: "new" , category: {id: catId}
   end
 
   def destroy
     @delSubCat = Subcategory.find_by(id: params[:id])
+    catId = @delSubCat.category.id
     @delSubCat.destroy
-    redirect_to admin_index_path
+    redirect_to action: "new" , category: {id: catId}
   end
 
 end
