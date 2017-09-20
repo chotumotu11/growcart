@@ -27,6 +27,6 @@ class CartsController < ApplicationController
   	itemIds = itemsToBuy.pluck :id
   	current_user.carts.destroy_all
   	current_user.items << itemsToBuy
-  	redirect_to carts_path
+  	redirect_to user_path(current_user.id)
   end
 end

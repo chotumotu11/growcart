@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   end
 
   def update
-  	if current_user && current_user[:name] == "admin"
+  	if current_user && current_user[:account_type] == "admin"
   		pass = params[:oldpassword]
   		if current_user.authenticate(pass)
   			newpass = params[:user][:password]

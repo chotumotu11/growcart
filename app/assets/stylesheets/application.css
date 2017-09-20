@@ -60,6 +60,13 @@ h3.text-center {
 
 body>.container{
 	margin-bottom: 70px;
-	margin-top: 70px;
+	margin-top: 90px;
 }
 
+
+@media (max-width: 767px){
+	body>.container{
+	margin-bottom: 70px;
+	margin-top: 150px;
+}
+}

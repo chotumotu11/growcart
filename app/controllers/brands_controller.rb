@@ -7,12 +7,16 @@ class BrandsController < ApplicationController
   end
 
   def new
+    unless params[:category] == "" || params[:subcategory] == "" 
       @cat = Category.find_by(id: params[:category])
       @subcat = Subcategory.find_by(id: params[:subcategory])
       @brands = @subcat.brands.all
       @subCatName = @subcat[:name]
       @catName = @cat[:name] 
       @newBrand = Brand.new
+    else
+       redirect_to admin_index_path , notice: "Please enter parameters"
+    end
   end
 
   def create

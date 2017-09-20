@@ -13,14 +13,18 @@ class SessionsController < ApplicationController
 
   def create
   	myUser = User.find_by(email: params[:user][:email])
-	pass = params[:user][:password]
+	  pass = params[:user][:password]
 
-	if myUser && myUser.authenticate(pass)
-		session[:user_id] = myUser.id
-		redirect_to root_path 
-	else
-		redirect_to login_path , notice: "Invalid password/email"
-	end
+    if session[:user_id].nil?
+    	if myUser && myUser.authenticate(pass)
+    		session[:user_id] = myUser.id
+    		redirect_to root_path 
+    	else
+    		redirect_to login_path , notice: "Invalid password/email"
+    	end
+    else
+      redirect_to root_path , alert: "Already Logged in as #{current_user.name}"
+    end
   end
 
   def destroy

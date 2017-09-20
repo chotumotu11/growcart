@@ -15,6 +15,7 @@
   </thead>
   <tbody>
   <% @allUsers.each do |use| %>
+  <% unless use.account_type == "admin" %>
     <tr>
       <th scope="row"><%= use[:id] %></th>
       <td><%= use[:name] %></td>
@@ -24,6 +25,7 @@
       <td><%= use[:account_type] %></td>
       <td><%= link_to "Destroy" , use , method: :delete%></td>
     </tr>
+    <% end %>
   <% end %>
   </tbody>
 </table>

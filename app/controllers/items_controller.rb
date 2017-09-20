@@ -7,11 +7,14 @@ class ItemsController < ApplicationController
   	@test2 = params[:subcategory]
   	@test3 = params[:brand]
   	@all_items = Item.all.order(id: :desc) if @test.nil?  || @test==""
-  	@cat = Category.find(@test) unless @test.nil? || @test==""
-  	@all_items = @cat.items unless @test.nil? || @test==""
+    
+    unless @test.nil? || @test==""
+    	@cat = Category.find(@test) 
+    	@all_items = @cat.items 
+    end
 
   	@subcat = @cat.subcategories.find_by(id: @test2) unless @test2.nil? || @test2=="" 	
-  	@all_items = @subcat.items unless @test2.nil? || @test2=="" || @subcat == nil
+  	@all_items = @subcat.items unless @subcat == nil
 
   	@brand = @subcat.brands.find_by(id: @test3) unless @test3.nil? || @test3=="" || @subcat == nil
   	@all_items = @brand.items unless @brand == nil

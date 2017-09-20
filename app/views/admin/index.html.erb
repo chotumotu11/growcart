@@ -41,29 +41,11 @@
       </li>
     </ul>
   </li>
-  <li role="presentation" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      Change Admin Password <span class="caret"></span>
-    </a>
-    <ul class="dropdown-menu">
-      <li>
-      	<%= form_for(current_user , url: admin_path(current_user[:id]) , method: "put") do |f|  %>
-				<div class="field">
-					<%= label_tag :old_password %>
-					<%= password_field_tag :oldpassword %>
-				</div>
-				<div class="field" >
-					<%= f.label :password %>
-					<%= f.password_field :password%>
-				</div>
-				<div class="action" >
-					<%= f.submit "Change" , class: "btn btn-success" %>
-				</div>
-				<% end %>
-      </li>
-    </ul>
+  <li  class="nav-item">
+    <%= link_to "Change Password" , edit_admin_path(current_user.id) , method: "get" %>
   </li>
 </ul>
+
 
 <h3> Recently Bought Items</h3>
 
