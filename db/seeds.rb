@@ -86,6 +86,5 @@ Category.second.subcategories.second.brands.third.items.create! [{title: "salmon
 {title: "brazilian fish", price: 40 , description: "A very good fish"}]
 
 
-User.create! [{name: "Dipayan Deb", email: "chotumotu11@gmail.com", phone: 9883060084 , address: "FE 197 Salt Lake" , password: "boo" ,account_type: "normal" },
-{name: "Deepak Tibrewal" , email: "Tibrewal@gmail.com", phone: 8999999999 , address: "Some Apartment" , password: "nuoo" ,account_type: "normal"}, 
+User.create! [{name: "Deepak Tibrewal" , email: "Tibrewal@gmail.com", phone: 8999999999 , address: "Some Apartment" , password: "nuoo" ,account_type: "normal"}, 
 {name: "admin" , email: "admin@admin.com" , phone: 8999999997 , address: "admin", password: "admin" , account_type: "admin"}]
