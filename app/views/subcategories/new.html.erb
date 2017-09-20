@@ -1,5 +1,5 @@
- <h2><%= notice %></h2>
- <h4> <%= link_to "Admin Dashboard" , admin_index_path, method: "get" , class: "btn btn-success" %>
+<h2><%= notice %></h2>
+<h4> <%= link_to "Admin Dashboard" , admin_index_path, method: "get" , class: "btn btn-success" %>
 <h3>Add new Subcategory for <%= @catname %> </h3>
 <%= form_for(@newSubCat) do |f| %>
 	<div class= "field" >
@@ -10,7 +10,7 @@
 	</div>
 <% end %>
 
-	<table class="table">
+<table class="table">
   <thead>
     <tr>
       <th>Category Name</th>

@@ -3,6 +3,5 @@
     <div class="navbar-header"> <h3><%= link_to "GrowCart", root_path , id: "logo" %></h3></div>
     <p class="navbar-text navbar-right"><%= logged_in? ? "Signed in as #{@userName.name}" : "Not signed in" %></p>
     <p class="navbar-text navbar-right"> <%= logged_in? ? link_to("Logout" , logout_path , method: :delete) : link_to("login" , login_path)  %> </p>
-
   </div>
 </header>

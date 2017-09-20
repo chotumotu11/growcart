@@ -19,18 +19,20 @@ class UsersController < ApplicationController
 
   def create
   	@user = User.new(user_params)
-
   	if @user.save
   		acc_type = User.find_by(email: params[:user][:email])
   		acc_type.account_type = "normal"
   		acc_type.save
-  		session[:user_id] = acc_type.id
-      redirect_to root_path , notice: "logged in successfully"
+      if current_user && current_user.account_type=="admin"
+        redirect_to admin_index_path , notice: "New user created successfully"
+      else
+  		  session[:user_id] = acc_type.id
+        redirect_to root_path , notice: "logged in successfully"
+      end
 
   	else
   		render :new
   	end
-
   end
 
   def show
