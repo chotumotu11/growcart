@@ -62,3 +62,8 @@ run "rails db:migrate"
 run "rails db:seed" - optional
 
 run "rails s"
+
+Default Admin Account details
+
+Username : admin@admin.com
+password : admin
