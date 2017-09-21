@@ -12,10 +12,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    email = params[:user][:email].downcase!
+    email = params[:user][:email].downcase
   	myUser = User.find_by(email: email)
 	  pass = params[:user][:password]
 
+    p "test 1 #{email}"
     if session[:user_id].nil?
     	if myUser && myUser.authenticate(pass)
     		session[:user_id] = myUser.id
