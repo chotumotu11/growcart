@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-	before_action :set_post , only: [:show , :edit , :update , :destroy]
+	before_action :set_post , only: [:destroy]
   skip_before_action :ensure_login , only: [:new , :create]
-  skip_before_action :ensure_admin , only: [:new , :create , :show ]
+  skip_before_action :ensure_admin , only: [:new , :create , :show , :edit , :update]
 
 	def index
 		@allUsers = User.all 
@@ -18,9 +18,27 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @my_user = current_user
   end
 
   def update
+    @my_user = current_user
+    @old_password = params[:user][:Old_Password]
+    @new_password = params[:user][:password]
+    unless @old_password==""
+      if @my_user.authenticate(@old_password)
+        @my_user.update(password: @new_password)
+        flash[:notice] = "Password updated successfully" unless @new_password==""
+      else
+        flash[:notice] = "Unable to update password"
+      end
+    end
+    if @my_user.update(user_edit_params)
+      redirect_to edit_user_path(@my_user)
+    else
+      render :edit , object: @my_user
+    end
+
   end
 
   def create
@@ -59,6 +77,9 @@ class UsersController < ApplicationController
   		params.require(:user).permit(:name,:email,:address,:phone,:password)
   	end
 
+    def user_edit_params
+      params.require(:user).permit(:name,:email,:address,:phone)
+    end
   	def set_post
   		@my_user = User.find_by(id: params[:id]) 
   	end

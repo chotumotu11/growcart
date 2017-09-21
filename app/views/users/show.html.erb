@@ -1,5 +1,6 @@
 <section>
 	<h2>Your Profile</h2>
+  <%= link_to "Edit" , edit_user_path(current_user.id) , class: "btn btn-primary" %>
 	<ul class="list-group">
   <li class="list-group-item">Name : <%= current_user.name %></li>
   <li class="list-group-item">Address : <%= current_user.address %></li>
