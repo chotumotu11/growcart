@@ -18,13 +18,17 @@ class SubcategoriesController < ApplicationController
   end
 
   def create
-   catId = params[:subcategory][:category]
-   subCatName = params[:subcategory][:name]
-   @cat = Category.find_by(id: catId)
-   @newSubCat = @cat.subcategories.create(name: subCatName)
-   @newSubCat.save
-   p @newSubCat.errors.messages
-   redirect_to action: "new" , category: {id: catId}
+    catId = params[:subcategory][:category]
+    subCatName = params[:subcategory][:name]
+    @cat = Category.find_by(id: catId)
+    @newSubCat = @cat.subcategories.create(name: subCatName)
+    if @newSubCat.save
+      flash[:notice] = "Added successfully"
+      redirect_to action: "new" , category: {id: catId}
+    else
+      flash[:notice] = "Subcategory already exist/Blank Field"
+      redirect_to action: "new" , category: {id: catId}
+    end
   end
 
   def destroy

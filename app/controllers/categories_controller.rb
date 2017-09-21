@@ -8,10 +8,10 @@ class CategoriesController < ApplicationController
   def create
   	@createCat = Category.new(category_params)
   	if @createCat.save
-  		redirect_to new_category_path 
+  		redirect_to new_category_path , notice: "Successfully added category"
   	else
-  		redirect_to new_category_path
-  	end
+  		redirect_to new_category_path , notice: "Category Already exists/Blank Field"
+  	end 
   end
 
   def destroy

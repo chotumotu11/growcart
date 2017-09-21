@@ -25,8 +25,13 @@ class BrandsController < ApplicationController
     catId = @subCat.category.id
     brand = params[:brand][:name]
     @newBrand = @subCat.brands.create(name: brand)
-    @newBrand.save
-    redirect_to action: "new" , subcategory: subCatId , category: catId
+    if @newBrand.save
+      flash[:notice] = "Brand added"
+      redirect_to action: "new" , subcategory: subCatId , category: catId
+    else
+      flash[:notice] = "Brands already exist/Empty field"
+      redirect_to action: "new" , subcategory: subCatId , category: catId
+    end
   end
 
   def destroy
