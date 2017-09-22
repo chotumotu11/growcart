@@ -47,14 +47,25 @@
 </ul>
 
 
-<h3> Recently Bought Items</h3>
+<h3> Recent Transactions</h3>
 
-<% @allUsers.each do |user| %>
-	<% items = user.items.all %>
-	<% unless items == [] %>
-	<% unless user.account_type=="admin" %> 
-		<div class="alert alert-success" role="alert">
-			 User Name: <%= user.name %> and User ID : <%= user.id %>
+<% @allOrders.each do |order| %>
+		<div class="alert alert-warning row" role="alert">
+			<div class="col-sm-2">
+				Order id:	<%= order.id %>
+			</div>
+			<div class="col-sm-2">
+				User id: <%= order.user.id %>
+			</div>
+			<div class="col-sm-2">
+				User name: <%= order.user.name %>
+			</div>
+			<div class="col-sm-4">
+				Delivery Address: <%= order.daddress %>
+			</div>
+			<div class="col-sm-2">
+				Date and Time : <%= order.created_at.in_time_zone("Kolkata").strftime(" %d %m %Y , %I %M %p %Z") %>
+			</div>
 		</div>
 		<table class="table">
 	  	<thead>
@@ -62,21 +73,22 @@
 	      	<th>#</th>
 	      	<th>Title</th>
 	      	<th>Price</th>
-	      	<th>Options</th>
+	      	<th>Description</th>
+	      	<th>Option </th> 
 	    	</tr>
 	  	</thead>
 	  	<tbody>
-	  	<% items.each do |item| %>
+	  	<% orderitem = order.OrderedItems %>
+	  	<% orderitem.each do |oi| %>
 	    	<tr>
-	      	<th scope="row"><%= item.id %></th>
-	      	<td><%= item.title %></td>
-	      	<td><%= item.price %></td>
-	      	<td><%= link_to "View" , item %></td>
+	      	<th scope="row"><%= oi.id %></th>
+	      	<td><%= oi.title %></td>
+	      	<td><%= oi.price %></td>
+	      	<td><%= oi.description %></td>
+	      	<td><%= link_to "View" , oi.item %> </td>
 	    	</tr>
 	    <% end %>
 	  	</tbody>
 		</table>
-	<% end %>
-	<% end %>
 <% end %>
 

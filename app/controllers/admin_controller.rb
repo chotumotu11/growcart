@@ -2,6 +2,7 @@ class AdminController < ApplicationController
   def index
   	@newItem = Item.new
     @allUsers = User.all
+    @allOrders = Order.order(id: :desc).all
   end
 
   def update
