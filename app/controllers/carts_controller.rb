@@ -24,9 +24,23 @@ class CartsController < ApplicationController
 
   def destroy
   	itemsToBuy = current_user.my_cart_items
-  	itemIds = itemsToBuy.pluck :id
-  	current_user.carts.destroy_all
-  	current_user.items << itemsToBuy
-  	redirect_to user_path(current_user.id)
+    if itemsToBuy==[]
+      redirect_to carts_path
+    else
+    	itemIds = itemsToBuy.pluck :id
+    	current_user.carts.destroy_all
+    	current_user.items << itemsToBuy
+      address = params[:daddress]
+      if params[:daddress]==""
+        address= current_user.address
+      end
+      current_order = current_user.orders.create(daddress: address)
+      itemsToBuy.each do |item|
+        current_item = current_order.OrderedItems.create(title: item.title , price: item.price , description: item.description)
+        current_item.save!
+        item.OrderedItems << current_item
+      end
+    	redirect_to user_path(current_user.id)
+    end
   end
 end

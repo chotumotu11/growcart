@@ -22,5 +22,16 @@
   </tbody>
 </table>
 <div class=buttons>
-<%= link_to "Buy and Chekout" , Cart.first , method: :delete , class: "btn btn-success pull-right" %>
+<% unless current_user.carts.first.nil? %>
+  <%= form_tag current_user.carts.first , method: :delete do %>
+    <%= submit_tag "But and Checkout" , class: "btn btn-success pull-right" %>
+    <div class="form-group row">
+      <%= label_tag :Delivery_Address , nil ,class: "col-sm-12 col-sm-label" %>
+      <div class="col-sm-6">
+        <%= text_area_tag :daddress , current_user.address , class: "form-control"%>
+      </div>
+    </div>
+  <% end %>
+  <small>* if delivery address is left empty then items will be delivered to the address used while signing up. </small>
+<% end %>
 </div>

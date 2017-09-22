@@ -74,11 +74,12 @@ class ItemsController < ApplicationController
     @av = params[:item][:avatar]
     if item_name=="" || item_price=="" || item_description==""
       redirect_to edit_item_path(params[:id]) , notice: "Fields Cannot be empty"
-    elsif @av.nil?
-      redirect_to root_path
     else
       @oldBrand = @item.getbrand
-      @item.update(title: item_name, price: item_price , description: item_description , avatar: @av)
+      @item.update(title: item_name, price: item_price , description: item_description)
+      unless @av.nil?
+        @item.update(avatar: @av)
+      end
       @oldBrand.items.delete(@item) unless @oldBrand.nil?
       @updateItem = Item.find_by(id: params[:id])
       @newBrand.items << @updateItem

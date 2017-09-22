@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @itemsBought = current_user.items.all 
+    @orders = current_user.orders.order(id: :desc).all 
   end
 
   def destroy

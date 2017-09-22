@@ -8,29 +8,46 @@
   <li class="list-group-item">Phone : <%= current_user.phone %></li>
 </ul>
 
-	<h2>Item History</h2>
-	<%= "No Orders" if @itemsBought== [] %>
-	<ul class="list-group">
-		<table class="table">
-  		<thead>
-    		<tr>
-      		<th>Item id</th>
-      		<th>Title</th>
-      		<th>Price</th>
-      		<th>View</th>
-    		</tr>
-  		</thead>
-		<% @itemsBought.each do |item| %>
-  		<tbody>
-    		<tr>
-      		<th scope="row"><%= item.id %> </th>
-      		<td><%= item.title %></td>
-      		<td> <%= item.price %> </td>
-      		<td><%= link_to "View" , item %></td>
-    		</tr>
-  		</tbody>
-  	<% end %>
-		</table>
-	</ul>
+	<h2>Order History</h2>
+	<%= "No Orders" if @orders == [] %>
+  <% @orders.each do |order| %>
+    <div class="alert alert-success row" role="alert">
+      <div class="col-sm-2">
+        Order id: <%= order.id %>
+      </div>
+      <div class="col-sm-3">
+        Order Date: <%=order.created_at.to_date %>
+      </div>
+      <div class="col-sm-3">
+        Order Time: <%= order.created_at.in_time_zone("Kolkata").strftime(" %I:%M %P %Z ") %>
+      </div>
+      <div class="col-sm-4">
+        Delivery Address: <%= order.daddress %>
+      </div>
+    </div>
+    <% items = order.OrderedItems.all %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>View Option</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% items.each do |item| %>
+          <tr>
+            <th scope="row"><%= item[:id] %></th>
+            <td><%= item[:title] %></td>
+            <td><%= item[:price] %></td>
+            <td><%= item[:description] %></td>
+            <td><%= link_to "View" , item.item %> </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
 </section>
 
