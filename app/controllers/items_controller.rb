@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
     @price = params[:price]
     @desc = params[:description]
     @av = params[:avatar]
-    if @title=="" || @price=="" || @desc=="" || @av.nil? || params[:category]=="" || params[:subcategory]=="" || params[:brand]==""
+    if @title=="" || @price=="" || @desc==""  || params[:category]=="" || params[:subcategory]=="" || params[:brand]==""
       redirect_to new_item_path , alert: "fields cannot be empty"
     else
       @category = Category.find_by(id: params[:category])
