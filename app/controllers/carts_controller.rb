@@ -28,7 +28,6 @@ class CartsController < ApplicationController
       redirect_to carts_path
     else
     	itemIds = itemsToBuy.pluck :id
-    	current_user.carts.destroy_all
     	current_user.items << itemsToBuy
       address = params[:daddress]
       if params[:daddress]==""
@@ -40,6 +39,7 @@ class CartsController < ApplicationController
         current_item.save!
         item.OrderedItems << current_item
       end
+      current_user.carts.destroy_all
     	redirect_to user_path(current_user.id)
     end
   end
