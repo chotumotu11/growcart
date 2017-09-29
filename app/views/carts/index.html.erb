@@ -17,7 +17,7 @@
     	<th scope="row"><%= theItem[:id] %></th>
     	<td><%= theItem[:title] %></td>
     	<td><%= theItem[:price] %></td>
-      <td><%=  Cart.quantity(theItem[:id])%></td>
+      <td><%=  Cart.quantity(theItem[:id], current_user.id)%></td>
     	<td><%= link_to "Remove" , cart_path(theItem) , method: :put %></td>
   	</tr>
   <% end %>
