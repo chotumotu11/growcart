@@ -21,7 +21,7 @@
   	<% @subCatAll.each do |subcat| %>
     <tr>
       <td scope="row"><%= subcat[:name] %></td>
-      <td><%= link_to "Destroy" , subcat , method: :delete%></td>
+      <td> <%= link_to "Edit" , edit_subcategory_path(subcat.id) %> /<%= link_to "Destroy" , subcat , method: :delete%></td>
     </tr>
   <% end %>
   </tbody>

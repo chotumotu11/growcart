@@ -17,6 +17,12 @@ class SubcategoriesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def edit
+  end
+
   def create
     catId = params[:subcategory][:category]
     subCatName = params[:subcategory][:name]

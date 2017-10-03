@@ -14,6 +14,18 @@ class CategoriesController < ApplicationController
   	end 
   end
 
+  def edit
+    @cat = Category.find_by(id: params[:id])
+  end
+
+  def update 
+    newCat = params[:category][:name]
+    catId = params[:id]
+    cat = Category.find_by(id: catId)
+    cat.update name: newCat
+    redirect_to new_category_path
+  end
+
   def destroy
   	@delCat = Category.find_by(id: params[:id])
   	@delCat.destroy
