@@ -32,6 +32,7 @@
             <th>id</th>
             <th>Title</th>
             <th>Price</th>
+            <th>Quantity</th>
             <th>Description</th>
             <th>View Option</th>
           </tr>
@@ -42,6 +43,7 @@
             <th scope="row"><%= item[:id] %></th>
             <td><%= item[:title] %></td>
             <td><%= item[:price] %></td>
+            <td><%= item[:quantity] %> </td>
             <td><%= item[:description] %></td>
             <td><%= link_to "View" , item.item %> </td>
           </tr>

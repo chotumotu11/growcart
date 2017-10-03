@@ -35,7 +35,7 @@ class CartsController < ApplicationController
       end
       current_order = current_user.orders.create(daddress: address)
       itemsToBuy.each do |item|
-        current_item = current_order.OrderedItems.create(title: item.title , price: item.price , description: item.description)
+        current_item = current_order.OrderedItems.create(title: item.title , price: item.price , description: item.description, quantity: Cart.quantity(item.id,current_user.id))
         current_item.save!
         item.OrderedItems << current_item
       end
