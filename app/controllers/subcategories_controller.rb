@@ -18,9 +18,16 @@ class SubcategoriesController < ApplicationController
   end
 
   def edit
+    @subCat = Subcategory.find_by(id: params[:id])
   end
 
-  def edit
+  def update
+    newName = params[:subcategory][:name]
+    updateSub = Subcategory.find_by(id: params[:id])
+    newCat = Category.find_by(id: params[:category])
+    updateSub.update(name: newName)
+    newCat.subcategories << updateSub
+    redirect_to action: "new" , category: {id: params[:category]} 
   end
 
   def create
