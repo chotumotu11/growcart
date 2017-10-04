@@ -17,8 +17,8 @@
     	<th scope="row"><%= theItem[:id] %></th>
     	<td><%= theItem[:title] %></td>
     	<td><%= theItem[:price] %></td>
-      <td><%=  Cart.quantity(theItem[:id], current_user.id)%></td>
-    	<td><%= link_to "Remove" , cart_path(theItem) , method: :put %></td>
+      <td><%= link_to "" , carts_path(theItem.id) , method: :post , class: "glyphicon glyphicon-triangle-top" %> <%=  Cart.quantity(theItem[:id], current_user.id)%> <%= link_to "" , cart_path(theItem) , method: :put , class: "glyphicon glyphicon-triangle-bottom" %> </td>
+    	<td><%= link_to  "Delete" , edit_cart_path(theItem.id) %> </td>
   	</tr>
   <% end %>
   </tbody>

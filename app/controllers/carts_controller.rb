@@ -22,6 +22,15 @@ class CartsController < ApplicationController
   	redirect_to carts_path
   end
 
+  def edit
+    cart = Cart.where(user_id: current_user.id)
+    itemsToDelete = cart.where(item_id: params[:id])
+    itemsToDelete.each do |t|
+      t.destroy
+    end
+    redirect_to carts_path
+  end
+
   def destroy
   	itemsToBuy = current_user.my_cart_items
     if itemsToBuy==[]
