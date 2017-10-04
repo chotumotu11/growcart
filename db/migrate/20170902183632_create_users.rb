@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
     create_table :users do |t|
       t.string :name
       t.string :email
-      t.integer :phone, limit: 10
+      t.integer :phone, limit: 8
       t.string :address
       t.string :password_digest
       t.string :account_type
