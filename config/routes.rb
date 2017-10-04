@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :brands , only: [:index , :new ,:create , :destroy]
+  resources :brands , only: [:index , :edit, :update ,:new ,:create , :destroy]
   resources :subcategories, only: [:new ,:index,:edit,:update,:create , :destroy]
   resources :admin , only: [:index , :edit ,:update]
   resources :categories , only: [:new,:create,:edit,:update,:destroy]

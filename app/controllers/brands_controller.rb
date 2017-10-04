@@ -19,6 +19,24 @@ class BrandsController < ApplicationController
     end
   end
 
+  def edit
+    @brand= Brand.find_by(id: params[:id])
+    @cat = @brand.subcategory.category
+    @subcat = @cat.subcategories.all
+  end
+
+  def update
+    brand = Brand.find_by(id: params[:id])
+    if params[:subcategory]==""
+      redirect_to edit_brand_path(brand.id) , notice: "Unable to update as you did not assign a subcategory"
+    else
+      brand.update(name: params[:brand][:name])
+      subCat = Subcategory.find_by(id: params[:subcategory])
+      subCat.brands << brand
+      redirect_to edit_brand_path(brand.id) , notice: "Updated Successfully"
+    end
+  end
+
   def create
     subCatId = params[:brand][:subcategory]
     @subCat = Subcategory.find_by(id: subCatId)
