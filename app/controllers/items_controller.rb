@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
       if @newItem.save 
         redirect_to admin_index_path , notice: "Success for new item"
       else
-        redirect_to admin_index_path , notice: "Not Success for new item"
+        redirect_to new_item_path , notice: "Item was not added. Price must be a number"
       end    
     end
 
@@ -62,28 +62,32 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @cat = Category.find_by(id: params[:category])
-    @subcat = Subcategory.find_by(id: params[:subcategory])
-    @newBrand = Brand.find_by(id: params[:brand])
+    unless params[:category]=="" || params[:subcategory]=="" || params[:brand]==""
+      @cat = Category.find_by(id: params[:category])
+      @subcat = Subcategory.find_by(id: params[:subcategory])
+      @newBrand = Brand.find_by(id: params[:brand])
 
-    item_name = params[:item][:title]
-    item_price = params[:item][:price]
-    item_description = params[:item][:description]
+      item_name = params[:item][:title]
+      item_price = params[:item][:price]
+      item_description = params[:item][:description]
 
-    @item = Item.find_by(id: params[:id])
-    @av = params[:item][:avatar]
-    if item_name=="" || item_price=="" || item_description==""
-      redirect_to edit_item_path(params[:id]) , notice: "Fields Cannot be empty"
-    else
-      @oldBrand = @item.getbrand
-      @item.update(title: item_name, price: item_price , description: item_description)
-      unless @av.nil?
-        @item.update(avatar: @av)
+      @item = Item.find_by(id: params[:id])
+      @av = params[:item][:avatar]
+      if item_name=="" || item_price=="" || item_description==""
+        redirect_to edit_item_path(params[:id]) , notice: "Fields Cannot be empty"
+      else
+        @oldBrand = @item.getbrand
+        @item.update(title: item_name, price: item_price , description: item_description)
+        unless @av.nil?
+          @item.update(avatar: @av)
+        end
+        @oldBrand.items.delete(@item) unless @oldBrand.nil?
+        @updateItem = Item.find_by(id: params[:id])
+        @newBrand.items << @updateItem
+        redirect_to root_path
       end
-      @oldBrand.items.delete(@item) unless @oldBrand.nil?
-      @updateItem = Item.find_by(id: params[:id])
-      @newBrand.items << @updateItem
-      redirect_to root_path
+    else
+      redirect_to edit_item_path(params[:id]) , notice: "Category/Subcategory/Brand Cannot be empty"
     end
   end
 

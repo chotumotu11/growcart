@@ -27,8 +27,8 @@ class BrandsController < ApplicationController
 
   def update
     brand = Brand.find_by(id: params[:id])
-    if params[:subcategory]==""
-      redirect_to edit_brand_path(brand.id) , notice: "Unable to update as you did not assign a subcategory"
+    if params[:subcategory]=="" || params[:brand][:name]==""
+      redirect_to edit_brand_path(brand.id) , notice: "Unable to update as you did not assign a subcategory or left the text field blank"
     else
       brand.update(name: params[:brand][:name])
       subCat = Subcategory.find_by(id: params[:subcategory])
