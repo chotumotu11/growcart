@@ -1,5 +1,5 @@
  <h4><%= notice %> </h4>
- <h4> <%= link_to "Back", { action: "new" , category: {id: @subCat.category.id}}, class: "btn btn-success" %> </h4>
+ <h4> <%= link_to "Category", { action: "new" , category: {id: @subCat.category.id}}, class: "btn btn-success" %> </h4>
  <%= form_for(@subCat) do |t| %>
  <div class="field form-group row" >
 	 <%= t.label :name , class: "col-sm-2 col-sm-label" %>
