@@ -23,11 +23,17 @@ class SubcategoriesController < ApplicationController
 
   def update
     newName = params[:subcategory][:name]
-    updateSub = Subcategory.find_by(id: params[:id])
+    @subCat = Subcategory.find_by(id: params[:id])
     newCat = Category.find_by(id: params[:category])
-    updateSub.update(name: newName)
-    newCat.subcategories << updateSub
-    redirect_to action: "new" , category: {id: params[:category]} 
+    @subCat.update(name: newName)
+    newCat.subcategories << @subCat
+    unless @subCat.errors.any?
+      flash[:notice] = "Updated Successfully"
+      redirect_to  action: "new" , category: {id: params[:category]}
+    else
+      flash[:notice] = "Not Updated: The Category might already have an subcategory with the same name / Empty Field"
+      redirect_to action: "edit" 
+    end
   end
 
   def create

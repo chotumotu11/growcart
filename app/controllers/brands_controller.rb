@@ -33,7 +33,11 @@ class BrandsController < ApplicationController
       brand.update(name: params[:brand][:name])
       subCat = Subcategory.find_by(id: params[:subcategory])
       subCat.brands << brand
-      redirect_to edit_brand_path(brand.id) , notice: "Updated Successfully"
+      if brand.errors.any?
+        redirect_to edit_brand_path(brand.id) , notice: "The subcategory already has a brand with the same name"
+      else
+        redirect_to edit_brand_path(brand.id) , notice: "Updated Successfully"
+      end
     end
   end
 
