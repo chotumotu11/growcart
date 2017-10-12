@@ -12,14 +12,14 @@ class CartsController < ApplicationController
   	@theItem = Item.find_by(id: @itemNumber)
   	@theItem.carts << @cartItem
   	current_user.carts << @cartItem
-  	redirect_to carts_path
+  	redirect_to carts_path , notice: "Item successfully added"
   end
 
   def update
   	itemsInCartOfUser = Cart.where(user_id: current_user.id)
   	itemToDelete = itemsInCartOfUser.find_by(item_id: params[:id])
   	itemToDelete.destroy
-  	redirect_to carts_path
+  	redirect_to carts_path , notice: "A item was removed"
   end
 
   def edit
@@ -28,7 +28,7 @@ class CartsController < ApplicationController
     itemsToDelete.each do |t|
       t.destroy
     end
-    redirect_to carts_path
+    redirect_to carts_path , notice: "Item removed successfully"
   end
 
   def destroy
@@ -49,7 +49,7 @@ class CartsController < ApplicationController
         item.OrderedItems << current_item
       end
       current_user.carts.destroy_all
-    	redirect_to user_path(current_user.id)
+    	redirect_to user_path(current_user.id) , notice: "Your Order with id #{current_order.id} was placed successfully"
     end
   end
 end
