@@ -26,6 +26,7 @@
       </div>
     </div>
     <% items = order.OrderedItems.all %>
+    <% total=0 %>
       <table class="table">
         <thead>
           <tr>
@@ -47,9 +48,13 @@
             <td><%= item[:description] %></td>
             <td><%= link_to "View" , item.item %> </td>
           </tr>
+          <% floatPrice = item[:price].to_f %>
+          <% total= total+ (floatPrice*item[:quantity]) %>
         <% end %>
         </tbody>
       </table>
+      <h4 class="pull-right"> Grand Total = Rs. <%= total %>  </h4>
+      <p class="clearfix"> </p>
   <% end %>
 </section>
 
