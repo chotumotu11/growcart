@@ -50,6 +50,7 @@
 <h3> Recent Transactions</h3>
 
 <% @allOrders.each do |order| %>
+<% total=0 %>
 		<div class="alert alert-warning row" role="alert">
 			<div class="col-sm-2">
 				Order id:	<%= order.id %>
@@ -62,6 +63,7 @@
 			</div>
 			<div class="col-sm-4">
 				Delivery Address: <%= order.daddress %>
+				<p> Payment Type: COD(Cash on Delivery) </p>
 			</div>
 			<div class="col-sm-2">
 				Date and Time : <%= order.created_at.in_time_zone("Kolkata").strftime(" %d %m %Y , %I %M %p %Z") %>
@@ -89,8 +91,12 @@
 	      	<td><%= oi.description %></td>
 	      	<td><%= link_to "View" , oi.item %> </td>
 	    	</tr>
+	    	<% floatPrice = oi[:price].to_f %>
+        <% total= total+ (floatPrice*oi[:quantity]) %>
 	    <% end %>
 	  	</tbody>
 		</table>
+		<h4 class="pull-right"> Grand Total = <%= total %> </h4>
+		<p class="clearfix"> </p>
 <% end %>
 

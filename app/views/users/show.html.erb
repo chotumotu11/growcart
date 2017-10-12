@@ -23,10 +23,11 @@
       </div>
       <div class="col-sm-4">
         Delivery Address: <%= order.daddress %>
+        <p> Payment Type: COD(Cash on Delivery) </p>
       </div>
     </div>
     <% items = order.OrderedItems.all %>
-    <% total=0 %>
+    <% total=0 %> 
       <table class="table">
         <thead>
           <tr>
