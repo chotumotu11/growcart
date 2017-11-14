@@ -1,4 +1,5 @@
-# README
+The code here is almost same as the final submitted project. Some major changes include proper indentation.
+### README
 
 This is a full fleged grocery shopping system. It meets the following needs 
 
